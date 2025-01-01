@@ -1,0 +1,292 @@
+# Configuration for i3 window manager.
+#
+# Order of Contents:
+# - Styling
+# - Status Bars
+# - Workspaces
+# - Layouts
+# - System and Daemons
+#
+# Complete reference at https://i3wm.org/docs/userguide.html
+
+
+
+# Cmd/Win/Super key as mod/leader key.
+set $mod Mod4
+
+# Reload the configuration file
+bindsym $mod+Shift+c reload
+
+# Restart i3 inplace (preserves layout/session, can be used to upgrade i3).
+bindsym $mod+Shift+r restart
+
+
+
+### Styling
+
+# Window title font.
+# Also used by status bars unless a different font is defined in bar {} blocks.
+font pango:monospace 10
+
+# Complete container border elimination (with a mass toggle key binding).
+for_window [class="^.*"] border pixel 0
+bindsym $mod+Shift+b [class="^.*"] border toggle
+
+# Configure space between containers and to the screen edges.
+gaps inner 8px
+gaps outer 0px
+
+
+
+### Status Bars
+
+# Primary display bar.
+bar {
+        output DP-0
+        status_command i3status -c ~/.config/i3/main-status
+        tray_output none
+}
+
+# Secondary side displays' bar.
+bar {
+        output HDMI-0
+        output HDMI-1
+        status_command i3status -c ~/.config/i3/side-status
+        tray_output HDMI-1
+}
+
+
+
+### Workspaces
+
+# Define names for default workspaces for which we configure key bindings later on.
+# We use variables to avoid repeating the names in multiple places.
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+set $ws11 "11"
+set $ws12 "12"
+set $ws13 "13"
+set $ws14 "14"
+set $ws15 "15"
+set $ws16 "16"
+set $ws17 "17"
+set $ws18 "18"
+set $ws19 "19"
+set $ws20 "20"
+
+# Switch to workspace.
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+bindsym $mod+Ctrl+1 workspace number $ws11
+bindsym $mod+Ctrl+2 workspace number $ws12
+bindsym $mod+Ctrl+3 workspace number $ws13
+bindsym $mod+Ctrl+4 workspace number $ws14
+bindsym $mod+Ctrl+5 workspace number $ws15
+bindsym $mod+Ctrl+6 workspace number $ws16
+bindsym $mod+Ctrl+7 workspace number $ws17
+bindsym $mod+Ctrl+8 workspace number $ws18
+bindsym $mod+Ctrl+9 workspace number $ws19
+bindsym $mod+Ctrl+0 workspace number $ws20
+
+# Move focused container to workspace.
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+bindsym $mod+Ctrl+Shift+1 move container to workspace number $ws11
+bindsym $mod+Ctrl+Shift+2 move container to workspace number $ws12
+bindsym $mod+Ctrl+Shift+3 move container to workspace number $ws13
+bindsym $mod+Ctrl+Shift+4 move container to workspace number $ws14
+bindsym $mod+Ctrl+Shift+5 move container to workspace number $ws15
+bindsym $mod+Ctrl+Shift+6 move container to workspace number $ws16
+bindsym $mod+Ctrl+Shift+7 move container to workspace number $ws17
+bindsym $mod+Ctrl+Shift+8 move container to workspace number $ws18
+bindsym $mod+Ctrl+Shift+9 move container to workspace number $ws19
+bindsym $mod+Ctrl+Shift+0 move container to workspace number $ws20
+
+# Restart certain workspaces to only open on specific displays.
+# Gracefully uses other displays when specified display is not available.
+workspace $ws1 output DP-0
+workspace $ws2 output DP-0
+workspace $ws3 output DP-0
+workspace $ws4 output DP-0
+workspace $ws5 output DP-0
+workspace $ws6 output DP-0
+workspace $ws7 output DP-0
+workspace $ws8 output DP-0
+workspace $ws9 output DP-0
+workspace $ws10 output DP-0
+
+workspace $ws11 output HDMI-0
+workspace $ws12 output HDMI-0
+workspace $ws13 output HDMI-0
+workspace $ws14 output HDMI-0
+workspace $ws15 output HDMI-0
+
+workspace $ws16 output HDMI-1
+workspace $ws17 output HDMI-1
+workspace $ws18 output HDMI-1
+workspace $ws19 output HDMI-1
+workspace $ws20 output HDMI-1
+
+# Restrict certain applications to only open on specific workspaces.
+assign [class="^brave-browser$"] $ws16
+assign [class="^Slack$"] $ws20
+assign [class="^discord$"] $ws19
+assign [class="^obs$"] $ws11
+assign [class="^Spotify$"] $ws12
+assign [title="^App$"] $ws15
+
+
+
+### Layouts
+
+focus_on_window_activation none
+
+# Custom layout manager, fork of: https://github.com/chmln/i3-auto-layout
+# The fork is not necessary, as the default still is a better layout.
+exec_always --no-startup-id i3-auto-layout
+
+# Fullscreen mode for the focused container.
+bindsym $mod+f fullscreen toggle
+
+# Floating (non-tiled) mode for the focused container.
+bindsym $mod+Shift+f floating toggle
+# Use Mouse+$mod to drag floating windows to their wanted position.
+floating_modifier $mod
+
+# Other container layouts (stacked, tabbed, toggle split).
+#bindsym $mod+s layout stacking
+#bindsym $mod+w layout tabbed
+#bindsym $mod+e layout toggle split
+
+# To be honest, not sure how these are useful.
+# Focus the parent container.
+#bindsym $mod+a focus parent
+# Focus the child container.
+#bindsym $mod+d focus child
+
+# Change container focus.
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# Alternatively, you can use the cursor keys.
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Move focused container position in layout.
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# Alternatively, you can use the cursor keys.
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+mode "resize" {
+        # It would be intuitive to think of the bar between windows
+        # while thinking about hjkl. It feels janky, but it's
+        # all about growing and shrinking windows.
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize shrink height 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
+
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize shrink height 10 px or 10 ppt
+        bindsym Up resize grow height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+
+
+### System and Daemons
+
+# This has weird side effects somehow, like resetting global volume to 40%.
+# It is supposed to just exit i3 (logging you out of your X session),
+# but is disabled due to the weird side effect until fixed.
+#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+# xss-lock grabs a logind suspend inhibit lock and will
+# use i3lock to lock the screen before suspend.
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+# Not sure whether should use i3lock or loginctl lock-session to lock displays.
+bindsym $mod+Shift+w exec --no-startup-id i3lock
+
+# Launch desktop environment-independent system tray GUI to manage networks.
+exec --no-startup-id nm-applet
+
+# Ensure displays are positioned correctly for navigating across displays.
+exec_always --no-startup-id ~/.screenlayout/default.sh &
+
+# Launch clipboard manager.
+exec_always --no-startup-id greenclip daemon &
+
+# Launch wallpaper manager.
+exec_always --no-startup-id nitrogen --restore
+
+# Launch compositor for effects like window opacity on all apps.
+exec_always --no-startup-id picom --experimental-backends -b
+
+# Activate kernel module for nvidia encoder and launch screen/camera recorder.
+# Each are sent through i3-msg to defer the launch after i3 is fully loaded.
+exec --no-startup-id i3-msg 'exec --no-startup-id nvidia-modprobe -c0 -u'
+exec --no-startup-id i3-msg 'exec --no-startup-id flatpak run com.obsproject.Studio'
+
+# Launch screenshots deamon and key bindings.
+# Daemon launch sent through i3-msg to defer the launch after i3 is fully loaded.
+exec --no-startup-id i3-msg 'exec --no-startup-id flatpak run org.flameshot.Flameshot'
+bindsym $mod+s exec --no-startup-id flatpak run --filesystem=home org.flameshot.Flameshot gui -c -p ~/Pictures/$(date +"%FT%T.%N%:::z").png
+bindsym $mod+Shift+s exec --no-startup-id flatpak run --filesystem=home org.flameshot.Flameshot full -p ~/Pictures/$(date +"%FT%T.%N%:::z").png
+
+# Show menu on side display to show clipboard history for re-copying.
+bindsym $mod+p exec --no-startup-id "rofi -modi \\"clipboard:greenclip print\\" -show clipboard -run-command '{cmd}' -monitor HDMI-1"
+
+# Show application launcher menu on side display.
+bindsym $mod+space exec --no-startup-id "rofi -modi drun,run -show drun -monitor HDMI-1"
+
+# Kill focused container and any contained windows.
+bindsym $mod+Shift+q kill
+
+# Launch terminal or terminal in tmux to persiste after closing.
+bindsym $mod+Shift+Return exec --no-startup-id ghostty
+bindsym $mod+Return exec --no-startup-id ghostty -e tmux new -s "sh_$(date +%s)"
+
+# Launch backup terminal or terminal in tmux to persiste after closing.
+bindsym $mod+Ctrl+Shift+Return exec --no-startup-id alacritty
+bindsym $mod+Ctrl+Return exec --no-startup-id alacritty -e tmux new -s "sh_$(date +%s)"
