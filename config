@@ -51,9 +51,9 @@ bar {
 # Secondary side displays' bar.
 bar {
         output HDMI-0
-        output HDMI-1
+        output DP-2
         status_command i3status -c ~/.config/i3/side-status
-        tray_output HDMI-1
+        tray_output DP-2
 }
 
 
@@ -146,11 +146,11 @@ workspace $ws13 output HDMI-0
 workspace $ws14 output HDMI-0
 workspace $ws15 output HDMI-0
 
-workspace $ws16 output HDMI-1
-workspace $ws17 output HDMI-1
-workspace $ws18 output HDMI-1
-workspace $ws19 output HDMI-1
-workspace $ws20 output HDMI-1
+workspace $ws16 output DP-2
+workspace $ws17 output DP-2
+workspace $ws18 output DP-2
+workspace $ws19 output DP-2
+workspace $ws20 output DP-2
 
 # Restrict certain applications to only open on specific workspaces.
 assign [class="^brave-browser$"] $ws16
@@ -268,12 +268,12 @@ exec_always --no-startup-id greenclip daemon &
 exec_always --no-startup-id nitrogen --restore
 
 # Launch compositor for effects like window opacity on all apps.
-exec_always --no-startup-id picom --experimental-backends -b
+exec_always --no-startup-id picom -b
 
 # Activate kernel module for nvidia encoder and launch screen/camera recorder.
 # Each are sent through i3-msg to defer the launch after i3 is fully loaded.
 exec --no-startup-id i3-msg 'exec --no-startup-id nvidia-modprobe -c0 -u'
-#exec --no-startup-id i3-msg 'exec --no-startup-id flatpak run com.obsproject.Studio'
+#exec --no-startup-id i3-msg 'exec --no-startup-id obs'
 exec --no-startup-id i3-msg 'exec --no-startup-id .apps/LM-Studio-0.3.14-5-x64.AppImage'
 exec --no-startup-id i3-msg 'exec --no-startup-id flatpak run com.spotify.Client'
 exec --no-startup-id i3-msg 'exec --no-startup-id flatpak run com.slack.Slack'
@@ -281,24 +281,26 @@ exec --no-startup-id i3-msg 'exec --no-startup-id flatpak run com.discordapp.Dis
 
 # Launch screenshots deamon and key bindings.
 # Daemon launch sent through i3-msg to defer the launch after i3 is fully loaded.
-exec --no-startup-id i3-msg 'exec --no-startup-id flatpak run org.flameshot.Flameshot'
+exec --no-startup-id i3-msg 'exec --no-startup-id flameshot'
+bindsym $mod+s exec --no-startup-id flameshot gui -c -p ~/Pictures/$(date +"%FT%T.%N%:::z").png
+bindsym $mod+Shift+s exec --no-startup-id flameshot full -p ~/Pictures/$(date +"%FT%T.%N%:::z").png
 
 bindsym $mod+s exec --no-startup-id flatpak run --filesystem=home org.flameshot.Flameshot gui -c -p ~/Pictures/$(date +"%FT%T.%N%:::z").png
 bindsym $mod+Shift+s exec --no-startup-id flatpak run --filesystem=home org.flameshot.Flameshot full -p ~/Pictures/$(date +"%FT%T.%N%:::z").png
 
 # Show menu on side display to show clipboard history for re-copying.
-bindsym $mod+p exec --no-startup-id "rofi -modi \\"clipboard:greenclip print\\" -show clipboard -run-command '{cmd}' -monitor HDMI-1"
+bindsym $mod+p exec --no-startup-id "rofi -modi 'clipboard:greenclip print' -show clipboard -run-command '{cmd}' -monitor DP-2"
 
 # Show application launcher menu on side display.
-bindsym $mod+space exec --no-startup-id "rofi -modi drun,run -show drun -monitor HDMI-1"
+bindsym $mod+space exec --no-startup-id "rofi -modi drun,run -show drun -monitor DP-2"
 
 # Kill focused container and any contained windows.
 bindsym $mod+Shift+q kill
 
 # Launch terminal or terminal in tmux to persiste after closing.
-bindsym $mod+Ctrl+Shift+Return exec --no-startup-id ghostty -e tmux new -s "sh_$(date +%s)"
-bindsym $mod+Ctrl+Return exec --no-startup-id ghostty
+bindsym $mod+Shift+Return exec --no-startup-id alacritty
+bindsym $mod+Return exec --no-startup-id alacritty -e tmux new -s "sh_$(date +%s)"
 
 # Launch backup terminal or terminal in tmux to persiste after closing.
-bindsym $mod+Shift+Return exec --no-startup-id alacritty -e tmux new -s "sh_$(date +%s)"
-bindsym $mod+Return exec --no-startup-id alacritty
+bindsym $mod+Ctrl+Shift+Return exec --no-startup-id ghostty
+bindsym $mod+Ctrl+Return exec --no-startup-id ghostty -e tmux new -s "sh_$(date +%s)"
