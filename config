@@ -170,7 +170,7 @@ focus_on_window_activation none
 
 # Custom layout manager, fork of: https://github.com/chmln/i3-auto-layout
 # The fork is not necessary, as the default still is a better layout.
-exec_always --no-startup-id i3-auto-layout
+# exec_always --no-startup-id i3-auto-layout
 
 # Fullscreen mode for the focused container.
 bindsym $mod+f fullscreen toggle
