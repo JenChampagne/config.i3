@@ -296,9 +296,9 @@ bindsym $mod+space exec --no-startup-id "rofi -modi drun,run -show drun -monitor
 bindsym $mod+Shift+q kill
 
 # Launch terminal or terminal in tmux to persiste after closing.
-bindsym $mod+Shift+Return exec --no-startup-id ghostty
-bindsym $mod+Return exec --no-startup-id ghostty -e tmux new -s "sh_$(date +%s)"
+bindsym $mod+Ctrl+Shift+Return exec --no-startup-id ghostty -e tmux new -s "sh_$(date +%s)"
+bindsym $mod+Ctrl+Return exec --no-startup-id ghostty
 
 # Launch backup terminal or terminal in tmux to persiste after closing.
-bindsym $mod+Ctrl+Shift+Return exec --no-startup-id alacritty
-bindsym $mod+Ctrl+Return exec --no-startup-id alacritty -e tmux new -s "sh_$(date +%s)"
+bindsym $mod+Shift+Return exec --no-startup-id alacritty -e tmux new -s "sh_$(date +%s)"
+bindsym $mod+Return exec --no-startup-id alacritty
