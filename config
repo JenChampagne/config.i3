@@ -34,8 +34,7 @@ bindsym $mod+Shift+b [class="^.*"] border toggle
 
 # Configure space between containers and to the screen edges.
 gaps inner 8px
-gaps top 8px
-gaps horizontal 8px
+gaps top 4px
 
 
 
@@ -202,6 +201,13 @@ bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
+
+# Switch to previous or next workspace
+bindsym $mod+Ctrl+h  workspace prev_on_output
+bindsym $mod+Ctrl+l workspace next_on_output
+
+bindsym $mod+Ctrl+Left  workspace prev_on_output
+bindsym $mod+Ctrl+Right workspace next_on_output
 
 # Move focused container position in layout.
 bindsym $mod+Shift+h move left
