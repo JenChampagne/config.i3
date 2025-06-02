@@ -291,8 +291,8 @@ exec --no-startup-id i3-msg 'exec --no-startup-id flameshot'
 bindsym $mod+s exec --no-startup-id flameshot gui -c -p ~/Pictures/$(date +"%FT%T.%N%:::z").png
 bindsym $mod+Shift+s exec --no-startup-id flameshot full -p ~/Pictures/$(date +"%FT%T.%N%:::z").png
 
-bindsym $mod+s exec --no-startup-id flatpak run --filesystem=home org.flameshot.Flameshot gui -c -p ~/Pictures/$(date +"%FT%T.%N%:::z").png
-bindsym $mod+Shift+s exec --no-startup-id flatpak run --filesystem=home org.flameshot.Flameshot full -p ~/Pictures/$(date +"%FT%T.%N%:::z").png
+# Launch rofi with rofimoji extension to insert unicode emoji.
+bindsym $mod+i exec --no-startup-id "rofimoji --action clipboard --selector-args='-monitor DP-2'"
 
 # Show menu on side display to show clipboard history for re-copying.
 bindsym $mod+p exec --no-startup-id "rofi -modi 'clipboard:greenclip print' -show clipboard -run-command '{cmd}' -monitor DP-2"
