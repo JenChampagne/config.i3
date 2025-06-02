@@ -34,7 +34,8 @@ bindsym $mod+Shift+b [class="^.*"] border toggle
 
 # Configure space between containers and to the screen edges.
 gaps inner 8px
-gaps outer 0px
+gaps top 8px
+gaps horizontal 8px
 
 
 
