@@ -154,10 +154,12 @@ workspace $ws20 output HDMI-1
 
 # Restrict certain applications to only open on specific workspaces.
 assign [class="^brave-browser$"] $ws16
+assign [class="^Google-chrome$"] $ws16
 assign [class="^Slack$"] $ws20
 assign [class="^discord$"] $ws19
 assign [class="^obs$"] $ws11
-assign [class="^Spotify$"] $ws12
+assign [class="^LM Studio$"] $ws12
+assign [class="^Spotify$"] $ws13
 assign [title="^App$"] $ws15
 
 
