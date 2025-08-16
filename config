@@ -160,6 +160,8 @@ assign [class="^obs$"] $ws11
 assign [class="^LM Studio$"] $ws12
 assign [class="^Spotify$"] $ws13
 assign [title="^App$"] $ws15
+assign [title="^Echo Paradox$"] $ws15
+assign [title="^Arcane Duelists$"] $ws15
 
 
 
@@ -280,7 +282,7 @@ exec_always --no-startup-id picom -b
 # Each are sent through i3-msg to defer the launch after i3 is fully loaded.
 exec --no-startup-id i3-msg 'exec --no-startup-id nvidia-modprobe -c0 -u'
 #exec --no-startup-id i3-msg 'exec --no-startup-id obs'
-exec --no-startup-id i3-msg 'exec --no-startup-id .apps/LM-Studio-0.3.14-5-x64.AppImage'
+exec --no-startup-id i3-msg 'exec --no-startup-id .apps/LM-Studio-0.3.23-3-x64.AppImage'
 exec --no-startup-id i3-msg 'exec --no-startup-id flatpak run com.spotify.Client'
 exec --no-startup-id i3-msg 'exec --no-startup-id flatpak run com.slack.Slack'
 exec --no-startup-id i3-msg 'exec --no-startup-id flatpak run com.discordapp.Discord'
@@ -290,6 +292,13 @@ exec --no-startup-id i3-msg 'exec --no-startup-id flatpak run com.discordapp.Dis
 exec --no-startup-id i3-msg 'exec --no-startup-id flameshot'
 bindsym $mod+s exec --no-startup-id flameshot gui -c -p ~/Pictures/$(date +"%FT%T.%N%:::z").png
 bindsym $mod+Shift+s exec --no-startup-id flameshot full -p ~/Pictures/$(date +"%FT%T.%N%:::z").png
+
+# Launch warpd for keyboard mouse movement.
+bindsym $mod+Shift+a exec warpd --normal
+bindsym $mod+a exec warpd --hint
+bindsym $mod+z exec warpd --grid
+
+bindsym $mod+v exec --no-startup-id ~/.apps/record_transcribe.sh
 
 # Launch rofi with rofimoji extension to insert unicode emoji.
 bindsym $mod+i exec --no-startup-id "rofimoji --action clipboard --selector-args='-monitor DP-2'"
